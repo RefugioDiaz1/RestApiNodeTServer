@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "CommonJS",
-    "moduleResolution": "Node",
+    "moduleResolution": "NodeNext",    
+    "module": "NodeNext",
     "esModuleInterop": true,
     "strict": false,
     "skipLibCheck": true,
@@ -10,7 +10,12 @@
     "rootDir":"./src",
     "lib": ["ESNext"],
     "sourceMap": true,
-    "declaration": true
+    "declaration": true,
+    //estos dos para cuando deseamos que ts pueda leer o interpretar los decoradores en mi modelo ej. @
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+
+    
   },
    "include": ["src/**/*.ts"]
 }

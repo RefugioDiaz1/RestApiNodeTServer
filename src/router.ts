@@ -1,24 +1,46 @@
 import {Router} from 'express'
+import { createProduct, getProduct, getProductById, updateProduct } from './handlers/product'
+import {body, param} from 'express-validator'
+import { handleInputErros } from './middleware'
 
 const router = Router()
 
-router.get('/',(req, res) => {
+router.get('/',
 
-    res.json('Desde GET')
+    handleInputErros,
+    getProduct
+ )
 
-})
+router.get('/:id',
+    
+    //Validacion
+    param('id').isInt().withMessage('Id No Válido'),
+    handleInputErros,
+    getProductById
+    
+)
 
-router.post('/',(req, res) => {
+router.post('/',
+    
+    //Validacion
+    body('name')
+            .notEmpty().withMessage('El nombre del producto no puede ir vacio'),
+    
+    body('price')
+            .isNumeric().withMessage('Valor no Válido')
+            .notEmpty().withMessage('EL precio del producto no puede ir vacio')
+            .custom((value)=> value > 0).withMessage('Precio no Válido'),
 
-    res.json('Desde POST')
+    handleInputErros,
 
-})
+    createProduct
+)
 
-router.put('/',(req, res) => {
+router.put('/:id',
 
-    res.json('Desde PUT')
+updateProduct
 
-})
+)
 
 router.patch('/',(req, res) => {
 

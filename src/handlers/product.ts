@@ -85,14 +85,14 @@ export const updateProduct= async (req: Request, res: Response) => {
                 error: 'Producto no Encontrado'
             })
         }
-        
+
         //Actualizar
 
         //La desventaja es que si solo le paso 1 parametro me trunca los demas y si uso update pues me actualiza lo que le pase
         // product.name = req.body.name
         // product.price = req.body.price
         // product.availability = req.body.availability
-
+        
         await product.update(req.body)
         await product.save()
 

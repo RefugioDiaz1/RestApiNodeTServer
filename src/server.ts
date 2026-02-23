@@ -9,7 +9,7 @@ async function connectDB(){
         
         await db.authenticate()
         db.sync()
-        console.log(colors.bgGreen.white('Conexion exitosa a la bd'))
+        //console.log(colors.bgGreen.white('Conexion exitosa a la bd'))
 
     } catch (error) {
         //console.log(error)
@@ -27,5 +27,9 @@ server.use(express.json())
 
 server.use('/api/products',router)
 //Routing
+
+server.get('/api', (req,res)=>{
+    res.json({msg: 'Desde Api'}) 
+})
 
 export default server

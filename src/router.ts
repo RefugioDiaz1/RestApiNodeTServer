@@ -1,5 +1,5 @@
 import {Router} from 'express'
-import { createProduct, getProduct, getProductById, updateProduct } from './handlers/product'
+import { createProduct, deleteProduct, getProduct, getProductById, updateAvailability, updateProduct } from './handlers/product'
 import {body, param} from 'express-validator'
 import { handleInputErros } from './middleware'
 
@@ -38,20 +38,46 @@ router.post('/',
 
 router.put('/:id',
 
+    param('id').isInt().withMessage('Id No Válido'),
+
+    //Para el put actualizo todo el modelo en la bd
+
+    //Validacion
+    body('name')
+            .notEmpty().withMessage('El nombre del producto no puede ir vacio'),
+    
+    body('price')
+            .isNumeric().withMessage('Valor no Válido')
+            .notEmpty().withMessage('EL precio del producto no puede ir vacio')
+            .custom((value)=> value > 0).withMessage('Precio no Válido'),
+
+    body('availability')
+            .isBoolean().withMessage('Valor para disponibilidad no válido'),        
+
+ handleInputErros,
+
 updateProduct
 
 )
 
-router.patch('/',(req, res) => {
+router.patch('/:id',
 
-    res.json('Desde PATCH')
+    param('id').isInt().withMessage('Id No Válido'),
 
-})
+    handleInputErros,
+    //Para el patch solo modifico 1 o algunos campos en especifico en la bd
+    updateAvailability
 
-router.delete('/',(req, res) => {
+)
 
-    res.json('Desde DELETE')
+router.delete('/:id', 
 
-})
+     param('id').isInt().withMessage('Id No Válido'),
+
+    handleInputErros,
+
+    deleteProduct
+
+)
 
 export default router

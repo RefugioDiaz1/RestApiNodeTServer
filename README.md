@@ -25,3 +25,21 @@ npm i express-validator
 npm i -D supertest @types/supertest jest @types/jest ts-jest
 
 npx ts-jest config:init
+
+npm test
+
+npm run test:coverage
+
+
+//Documentacion para la api
+
+ npm i swagger-jsdoc swagger-ui-express
+
+ npm i -D @types/swagger-jsdoc @types/swagger-ui-express
+
+
+ npm i morgan
+
+ npm i --save-dev @types/morgan
+
+ 
